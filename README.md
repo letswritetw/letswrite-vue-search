@@ -2,4 +2,4 @@
 
 用Vue.js的filter功能，製作的search功能範例
 
-[demo](https://github.com/auguston/vue-search-sample/)
+[demo](https://auguston.github.io/vue-search-sample/)
