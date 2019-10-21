@@ -1,5 +1,5 @@
-# vue-search-sample
+# Vue.js 用filter跟computed做一個簡易搜尋功能
 
-用Vue.js的filter功能，製作的search功能範例
+Demo：[demo](https://auguston.github.io/letswrite-vue-search/)
 
-<https://auguston.github.io/letswrite-vue-search/>
+筆記文：[Let's Write](https://letswrite.tw/vue-search/)

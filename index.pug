@@ -1,0 +1,88 @@
+- var link = 'letswrite-vue-search'
+- var title = 'Vue.js 用filter跟computed做一個簡易搜尋功能'
+- var description = '文章大綱'
+
+<!DOCTYPE html>
+html(lang="zh-TW")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title #{title} - Augustus - Let's Write
+
+    link(rel="canonical", href=`https://auguston.github.io/${link}/`)
+    meta(property="og:url", content=`https://auguston.github.io/${link}/`)
+
+    meta(property="fb:app_id", content="2435108729902508")
+    meta(property="og:type", content="website")
+
+    meta(property="og:site_name", content="Let's Write")
+    meta(property="og:title", content=`${title} - Augustus - Let's Write`)
+    meta(itemprop="name", content=`${title} - Augustus - Let's Write`)
+
+    meta(name="description", content=description)
+    meta(property="og:description", content=description)
+    meta(itemprop="description", content=description)
+
+    meta(itemprop="image", content=`https://auguston.github.io/${link}/fb.jpg`)
+    meta(property="og:image", content=`https://auguston.github.io/${link}/fb.jpg`)
+    meta(property="og:image:width", content="1200")
+    meta(property="og:image:height", content="630")
+    meta(property="og:image:alt", content=title)
+
+    link(rel="shortcut icon", href="https://i0.wp.com/letswrite.tw/wp-content/uploads/2019/07/cropped-letswrite512-1.jpg")
+
+    //- css
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css")
+    link(rel="stylesheet", href="dist/style.min.css")
+
+    // Google Tag Manager
+    script.
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PGQ9WQT');
+  body
+
+    // Google Tag Manager (noscript)
+    noscript
+      iframe(src="https://www.googletagmanager.com/ns.html?id=GTM-PGQ9WQT", height="0", width="0", style="display:none;visibility:hidden")
+    
+    #app.container
+
+      aside.loading-mask(:class="{ 'hidden': loadingStyle }", v-if="loading")
+        i.fa.fa-cog.fa-spin.fa-3x.fa-fw
+
+      section.hero.is-info
+        .hero-body
+          h1.title Vue.js 用filter跟computed做一個簡易搜尋功能
+          h2.subtitle
+            span Vue.js use Filter + Computed to build search function.
+          .has-text-right
+            a.button.is-dark.is-pulled-right(href="https://letswrite.tw/vue-search/")
+              span.icon
+                i.fa.fa-file-text-o
+              span Let's Write
+      
+      .news-list
+        nav.panel
+          p.panel-heading 搜尋功能示範
+          .panel-block
+            p.control.has-icons-left
+              input.input(type="text", placeholder="請輸入要搜尋的字詞", v-model="searchWords")
+              span.icon.is-small.is-left
+                i.fa.fa-search
+          a.panel-block(v-for="n in filterSearch", :href="n.url", target="_blank")
+            span.panel-icon.is-hidden-mobile
+              i.fa.fa-newspaper-o
+            .line
+              span {{ n.title }}
+              h5 {{ n.pubDate }}
+          h6
+            | 來源：
+            a(:href='provider.url', target='_blank') {{ provider.title }}
+
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js")
+    script(src="dist/main.min.js")

@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
   <head>
-    <title>Vue.js Filter Search - Augustus - Let's Write</title>
-    <meta name="description" content="用Vue.js的filter功能，製作的search功能範例"/>
-    <link rel="canonical" href="https://auguston.github.io/letswrite-vue-search/"/>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css"/>
-    <meta property="fb:app_id" content="484081328635964"/>
+    <title>Vue.js 用filter跟computed做一個簡易搜尋功能 - Augustus - Let's Write</title>
+    <link rel="canonical" href="https://auguston.github.io/letswrite-vue-search/"/>
     <meta property="og:url" content="https://auguston.github.io/letswrite-vue-search/"/>
+    <meta property="fb:app_id" content="2435108729902508"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:site_name" content="Vue.js Filter Search - Augustus - Let's Write"/>
-    <meta property="og:title" content="Vue.js Filter Search - Augustus - Let's Write"/>
-    <meta property="og:description" content="用Vue.js的filter功能，製作的search功能範例"/>
-    <meta property="og:image" content="https://auguston.github.io/letswrite-vue-search/src/assets/fb.png"/>
-    <meta property="og:image:width" content="1905"/>
-    <meta property="og:image:height" content="946"/>
+    <meta property="og:site_name" content="Let's Write"/>
+    <meta property="og:title" content="Vue.js 用filter跟computed做一個簡易搜尋功能 - Augustus - Let's Write"/>
+    <meta itemprop="name" content="Vue.js 用filter跟computed做一個簡易搜尋功能 - Augustus - Let's Write"/>
+    <meta name="description" content="文章大綱"/>
+    <meta property="og:description" content="文章大綱"/>
+    <meta itemprop="description" content="文章大綱"/>
+    <meta itemprop="image" content="https://auguston.github.io/letswrite-vue-search/fb.jpg"/>
+    <meta property="og:image" content="https://auguston.github.io/letswrite-vue-search/fb.jpg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:image:alt" content="Vue.js 用filter跟computed做一個簡易搜尋功能"/>
     <link rel="shortcut icon" href="https://i0.wp.com/letswrite.tw/wp-content/uploads/2019/07/cropped-letswrite512-1.jpg"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"/>
+    <link rel="stylesheet" href="dist/style.min.css"/>
     <!-- Google Tag Manager-->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -26,7 +31,6 @@
       j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
       })(window,document,'script','dataLayer','GTM-PGQ9WQT');
-      
     </script>
   </head>
   <body>
@@ -34,7 +38,31 @@
     <noscript>
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PGQ9WQT" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
-    <div id="app"></div>
-    <script src="dist/build.js"></script>
+    <div class="container" id="app">
+      <aside class="loading-mask" :class="{ 'hidden': loadingStyle }" v-if="loading"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i></aside>
+      <section class="hero is-info">
+        <div class="hero-body">
+          <h1 class="title">Vue.js 用filter跟computed做一個簡易搜尋功能</h1>
+          <h2 class="subtitle"><span>Vue.js use Filter + Computed to build search function.</span></h2>
+          <div class="has-text-right"><a class="button is-dark is-pulled-right" href="https://letswrite.tw/vue-search/"><span class="icon"><i class="fa fa-file-text-o"></i></span><span>Let's Write</span></a></div>
+        </div>
+      </section>
+      <div class="news-list">
+        <nav class="panel">
+          <p class="panel-heading">搜尋功能示範</p>
+          <div class="panel-block">
+            <p class="control has-icons-left">
+              <input class="input" type="text" placeholder="請輸入要搜尋的字詞" v-model="searchWords"/><span class="icon is-small is-left"><i class="fa fa-search"></i></span>
+            </p>
+          </div><a class="panel-block" v-for="n in filterSearch" :href="n.url" target="_blank"><span class="panel-icon is-hidden-mobile"><i class="fa fa-newspaper-o"></i></span>
+            <div class="line"><span>{{ n.title }}</span>
+              <h5>{{ n.pubDate }}</h5>
+            </div></a>
+          <h6>來源：<a :href="provider.url" target="_blank">{{ provider.title }}</a></h6>
+        </nav>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+    <script src="dist/main.min.js"></script>
   </body>
 </html>
